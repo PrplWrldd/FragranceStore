@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geolocation API with Google Maps Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      
+      margin: 1;
+      padding: 0;
+    }
+    
+    #map {
+       
+      height: 400px;
+      width: 100%;
+      border-top-right-radius: 5px;
+      border-color: blue;
+    }
+    #location {
+      position: absolute;
+      top: 20px;
+      left: 400px;
+      background-color: rgb(174, 255, 244);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+  <!-- Add your Google Maps API key here -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDevAT188_n2bHdB7ffy6Ldy0wcr1tkq5o&libraries=places"></script>
+</head>
+<body>
+   <h1>My current Location</h1>
+<div id="location"></div>
+<div id="map"></div>
+
+<script>
+  // Function to handle errors when fetching the current position
+  function handleLocationError(error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+    }
+  }
+
+  // Function to get the current position and initialize the map
+  function getCurrentPosition() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          // Success callback
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+
+          // Display latitude and longitude
+          displayLocation(latitude, longitude);
+
+          // Initialize the map
+          initMap(latitude, longitude);
+        },
+        function(error) {
+          // Error callback
+          handleLocationError(error);
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  // Function to initialize the map
+  function initMap(latitude, longitude) {
+    // Create a LatLng object with the provided latitude and longitude
+    var myLatLng = { lat: latitude, lng: longitude };
+
+    // Create a map centered at the provided LatLng object
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: myLatLng,
+      zoom: 15
+    });
+
+    // Create a marker at the provided LatLng object
+    var marker = new google.maps.Marker({
+      map: map,
+      position: myLatLng,
+      title: 'Your Current Position'
+    });
+  }
+
+  // Function to display latitude and longitude
+  function displayLocation(latitude, longitude) {
+    var locationElement = document.getElementById("location");
+    locationElement.textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
+  }
+
+  // Call the function to get the current position and initialize the map
+  getCurrentPosition();
+</script>
+
+</body>
+</html>
