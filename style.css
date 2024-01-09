@@ -7,24 +7,27 @@
     font-family: 'Noto Sans', sans-serif;
 
 }
+footer{
+    background-color: #594A26;
+    color: rgb(231, 211, 211);
+}
 header{
     background-color: #594A26;
     padding: 30px;
 }
 section{
-    min-height: 75vh;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 .main-1{
     background-image: url(images/bg3.svg) ;
+    min-height: 75vh;
 }
 .main-2{
     background-image: url(images/bg2.svg);
-    /* inverted background image vertically */
-
 }
+
 .main-1 h1{
     color: #ffefa8;
 }
@@ -43,7 +46,7 @@ section{
     transform: scale(1.1);
     cursor: pointer;
 }
-.row{
+.main-1 .row, .main-2 .row{
     height: 60vh;
 }
 .row h5{
