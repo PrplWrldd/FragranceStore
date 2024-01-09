@@ -8,7 +8,7 @@
 
 }
 header{
-    background-color: #F5D6BA;
+    background-color: #594A26;
     padding: 30px;
 }
 section{
@@ -16,7 +16,6 @@ section{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    width: 100%;
 }
 .main-1{
     background-image: url(images/bg3.svg) ;
